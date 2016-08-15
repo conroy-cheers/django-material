@@ -1,5 +1,5 @@
 {% load material_form material_form_internal %}
-{% part bound_field.field %}<div class="row">
+{% part bound_field.field %}
     <div{% attrs bound_field 'group' %}
         id="id_{{ bound_field.html_name }}_container"
         class="input-field col s12 datepicker{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
@@ -29,4 +29,4 @@
             {% include  'material/field_errors.html' %}
         {% endif %}{% endpart %}{{ hidden_initial }}
     </div>
-</div>{% endpart %}
+{% endpart %}
