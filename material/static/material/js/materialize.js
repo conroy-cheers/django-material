@@ -3032,11 +3032,11 @@ $(document).ready(function(){
               // Check if data isn't empty
               if (!$.isEmptyObject(data)) {
                   // Create autocomplete element
-                  var $autocomplete = $('<ul class="autocomplete-content dropdown-content"></ul>');
+                  var $autocomplete = $('<ul class="autocomplete-content dropdown-content" style="position: absolute"></ul>');
 
                   // Append autocomplete element
                   if ($inputDiv.length) {
-                      $inputDiv.append($autocomplete); // Set ul in body
+                      $inputDiv.append($autocomplete); // Set ul in bod
                   } else {
                       $input.after($autocomplete);
                   }
