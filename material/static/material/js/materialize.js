@@ -2039,7 +2039,7 @@ $(document).ready(function(){
         }
         else {
           // Insert as text;
-          toast.innerHTML = html; 
+          toast.innerHTML = html;
         }
         // Bind hammer
         var hammerHandler = new Hammer(toast, {prevent_default: false});
@@ -3067,6 +3067,10 @@ $(document).ready(function(){
 
                       // Check if the input isn't empty
                       if (val !== '') {
+
+                    	  var appended = 0;
+                    	  var maxAppend = 3;
+
                           for (var key in data) {
                               if (data.hasOwnProperty(key) &&
                                   key.toLowerCase().indexOf(val) !== -1 &&
@@ -3077,9 +3081,14 @@ $(document).ready(function(){
                                   } else {
                                       autocompleteOption.append('<span>' + key + '</span>');
                                   }
-                                  $autocomplete.append(autocompleteOption);
 
-                                  highlight(val, autocompleteOption);
+                                  if(appended < maxAppend){
+                                	  console.log('appending');
+                                	  $autocomplete.append(autocompleteOption);
+                                      appended++;
+                                      highlight(val, autocompleteOption);
+                                  }
+
                               }
                           }
                       }
