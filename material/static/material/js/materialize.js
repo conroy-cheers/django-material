@@ -3190,7 +3190,7 @@ $(document).ready(function(){
 
               var clrName = option.html().replace(/ /g, '-'); //Replaces all spaces with a dash
 //        	  options.append($('<div class="col l4 m6 s12" style="padding: 0px"><li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + '/><label></label>' + '<span style="border-radius: 10px; background-color: ' + clrString + '; padding-top: 4px; padding-bottom: 4px; padding-left: 6px; padding-right: 6px; color: ' + 'white' + ';">' + option.html() + '</span>' + '</span></li></div>'));
-        	  options.append($('<div class="mishDiv mishDiv' + clrName + ' col l3 m6 s12" style="padding: 0px"><li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + ' /><label></label>' + '<span class="mishText" >' + option.html() + '</span>' + '</span></li></div>'));  
+        	  options.append($('<div class="mishDiv mishDiv' + clrName + ' col l4 m6 s12" style="padding: 0px"><li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + ' /><label></label>' + '<span class="mishText" >' + option.html() + '</span>' + '</span></li></div>'));
           }
           
         } else {
