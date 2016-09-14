@@ -1,5 +1,5 @@
 /*!
- * Materialize v0.97.7 miint version (http://materializecss.com)
+ * Materialize v0.97.7 miint2 version (http://materializecss.com)
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
@@ -3111,17 +3111,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   /*************************************************
    *  Misha's Custom Select Plugin With Columns  *
    ************************************************/
@@ -3132,7 +3121,7 @@ $(document).ready(function(){
 
     $(this).each(function(){
 
-    	alert('calling each')
+//    	alert('calling each3')
       var $select = $(this);
 
       if ($select.hasClass('browser-default')) {
@@ -3170,6 +3159,7 @@ $(document).ready(function(){
       // Function that renders and appends the option taking into
       // account type and possible image icon.
       var appendOptionWithIcon = function(select, option, type) {
+    	  
         // Add disabled attr if disabled
         var disabledClass = (option.is(':disabled')) ? 'disabled ' : '';
         var optgroupClass = (type === 'optgroup-option') ? 'optgroup-option ' : '';
@@ -3180,10 +3170,12 @@ $(document).ready(function(){
         if (!!icon_url) {
           var classString = '';
           if (!!classes) classString = ' class="' + classes + '"';
-
+          
+//          alert('marker2')
+          
           // Check for multiple type.
           if (type === 'multiple') {
-            options.append($('<li class="' + disabledClass + '"><img src="' + icon_url + '"' + classString + '><span><input type="checkbox"' + disabledClass + '/><label></label>' + option.html() + '</span></li>'));
+            options.append($('<div class="col l4 m6 s12" style="padding: 0px"><li class="' + disabledClass + '"><img src="' + icon_url + '"' + classString + '><span><input type="checkbox"' + disabledClass + '/><label></label>' + option.html() + '</span></li></div>'));
           } else {
             options.append($('<li class="' + disabledClass + optgroupClass + '"><img src="' + icon_url + '"' + classString + '><span>' + option.html() + '</span></li>'));
           }
@@ -3192,12 +3184,20 @@ $(document).ready(function(){
 
         // Check for multiple type.
         if (type === 'multiple') {
-          options.append($('<li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + '/><label></label>' + option.html() + '</span></li>'));
+          if(disabledClass=='disabled '){
+        	  options.append($('<div class="col s12" style="padding: 0px"><li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + '/><label></label>' + option.html() + '</span></li></div>'));
+          } else {
+
+              var clrName = option.html().replace(/ /g, '-'); //Replaces all spaces with a dash
+//        	  options.append($('<div class="col l4 m6 s12" style="padding: 0px"><li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + '/><label></label>' + '<span style="border-radius: 10px; background-color: ' + clrString + '; padding-top: 4px; padding-bottom: 4px; padding-left: 6px; padding-right: 6px; color: ' + 'white' + ';">' + option.html() + '</span>' + '</span></li></div>'));
+        	  options.append($('<div class="mishDiv mishDiv' + clrName + ' col l3 m6 s12" style="padding: 0px"><li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + ' /><label></label>' + '<span class="mishText" >' + option.html() + '</span>' + '</span></li></div>'));  
+          }
+          
         } else {
           options.append($('<li class="' + disabledClass + optgroupClass + '"><span>' + option.html() + '</span></li>'));
         }
       };
-
+      
       /* Create dropdown structure. */
       if (selectChildren.length) {
         selectChildren.each(function() {
@@ -3220,17 +3220,52 @@ $(document).ready(function(){
           }
         });
       }
-
+      
       options.find('li:not(.optgroup)').each(function (i) {
         $(this).click(function (e) {
+        	
           // Check if option element is disabled
           if (!$(this).hasClass('disabled') && !$(this).hasClass('optgroup')) {
             var selected = true;
 
             if (multiple) {
-              $('input[type="checkbox"]', this).prop('checked', function(i, v) { return !v; });
-              selected = toggleEntryFromArray(valuesSelected, $(this).index(), $select);
-              $newSelect.trigger('focus');
+              
+              //Dank MishCode(TM) begins here
+              //Creates this node, finds span node where text is located and finds check node
+              thisNode = $(this);
+              spanNode = $('span[class*="mishText"]', this);
+              checkNode = $('input[type*="checkbox"]', this);
+              
+//              alert(JSON.stringify(options));
+              
+              //Finds as to whether we are selecting or unselecting
+              actualSelected = !(checkNode.prop('checked'));
+              
+              //Determines codified colour name
+              clrName = spanNode.text().replace(/ /g, '-'); //Replaces all spaces with a dash
+              
+              //Less Dank Materialize code
+              checkNode.prop('checked', function(i, v) { return !v; });
+              selected = toggleEntryFromArray(valuesSelected, $(this).parent().index(), $select); //Dank MishNote(TM): Added parent call here
+              
+              //Dank MishCode(TM)
+              if(actualSelected){
+            	thisNode.addClass('mishSelected');
+            	thisNode.addClass('mishSelected' + clrName);
+            	spanNode.addClass('mishTextActive');
+            	spanNode.addClass('mishTextActive' + clrName);
+//            	spanNode.css("color", "rgba(255, 255, 255, 1)");
+//              	$(this).find('span').css("user-select", "none");
+              } else {
+            	thisNode.removeClass('mishSelected');
+            	thisNode.removeClass('mishSelected' + clrName);
+            	spanNode.removeClass('mishTextActive');
+            	spanNode.removeClass('mishTextActive' + clrName);
+//              	$(this).find('span').css("color", "");
+//              	$(this).find('span').css("user-select", "none");
+              }
+              
+              //Less Dank Materialize code
             } else {
               options.find('li').removeClass('active');
               $(this).toggleClass('active');
