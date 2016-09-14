@@ -3236,8 +3236,6 @@ $(document).ready(function(){
               spanNode = $('span[class*="mishText"]', this);
               checkNode = $('input[type*="checkbox"]', this);
               
-//              alert(JSON.stringify(options));
-              
               //Finds as to whether we are selecting or unselecting
               actualSelected = !(checkNode.prop('checked'));
               
@@ -3254,15 +3252,11 @@ $(document).ready(function(){
             	thisNode.addClass('mishSelected' + clrName);
             	spanNode.addClass('mishTextActive');
             	spanNode.addClass('mishTextActive' + clrName);
-//            	spanNode.css("color", "rgba(255, 255, 255, 1)");
-//              	$(this).find('span').css("user-select", "none");
               } else {
             	thisNode.removeClass('mishSelected');
             	thisNode.removeClass('mishSelected' + clrName);
             	spanNode.removeClass('mishTextActive');
             	spanNode.removeClass('mishTextActive' + clrName);
-//              	$(this).find('span').css("color", "");
-//              	$(this).find('span').css("user-select", "none");
               }
               
               //Less Dank Materialize code
