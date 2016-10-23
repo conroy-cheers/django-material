@@ -799,7 +799,7 @@ if ($) {
         });
       }
       else {
-        $.Velocity.hook($modal, "scaleX", 0.7);
+        $.Velocity.hook($modal, "scaleX", 0.95); //Dank mishnote misha mishcorp: this used to be 0.7 and it was disgusting
         $modal.css({ top: options.starting_top });
           $modal.velocity({top: options.ending_top, opacity: 1, scaleX: '1'}, {
           duration: options.in_duration,
@@ -864,7 +864,7 @@ if ($) {
       }
       else {
         $modal.velocity(
-          { top: options.starting_top, opacity: 0, scaleX: 0.7}, {
+          { top: '9%', opacity: 0, scaleX: 1}, { //Mishnote: top used options.starting_top and scaleX used to be 0.7
           duration: options.out_duration,
           complete:
             function() {
